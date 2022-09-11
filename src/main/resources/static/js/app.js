@@ -30,12 +30,12 @@
             if (user) {
                 const userObj = JSON.parse(user)
                 if (!userObj.success) {
-                    console.log('User not logged in');
+                    console.log('Access Denied, user not logged in!!');
                     event.preventDefault();
                     $location.path('/login');
                 }
             } else {
-                console.log('Access Denied user not available');
+                console.log('Access Denied, user info not available!!');
                 event.preventDefault();
                 $location.path('/login');
             }

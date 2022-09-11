@@ -46,18 +46,20 @@ public class NoteRepository {
         return null;
     }
 
-    public void update(String username, Note note) {
+    public Note update(String username, Note note) {
         if (!NOTE_DATA.isEmpty()) {
             List<Note> userNotes = NOTE_DATA.get(username);
             if (userNotes != null && !userNotes.isEmpty()) {
                 List<Note> unchangedNotes = userNotes.stream().filter(nt -> nt.getId() != note.getId()).collect(Collectors.toList());
                 unchangedNotes.add(note);
                 NOTE_DATA.put(username, unchangedNotes);
+                return note;
             }
         }
+        return null;
     }
 
-    public void save(String username, Note note) {
+    public Note save(String username, Note note) {
         List<Note> userNotes = NOTE_DATA.get(username);
         if (userNotes == null) {
             userNotes = new ArrayList<>();
@@ -71,5 +73,6 @@ public class NoteRepository {
             userNotes.add(note);
             NOTE_DATA.put(username, userNotes);
         }
+        return note;
     }
 }
